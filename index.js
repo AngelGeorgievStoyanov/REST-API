@@ -1,7 +1,11 @@
 const express = require('express');
-const  mongoose  = require('mongoose');
-const { authController } = require('./contrllers/authController');
+const mongoose = require('mongoose');
+const authController = require('./contrllers/authController');
+const dataController = require('./contrllers/dataController');
 const cors = require('./middlewares/cors');
+const session = require('./middlewares/session')
+
+
 const PORT = 3030
 const connectionString = 'mongodb://localhost:27017/tricksForTravelers';
 
@@ -15,19 +19,21 @@ async function start() {
     } catch (err) {
         throw new Error(err.message)
     }
-   
+
 
     const app = express();
     app.use(express.json());
 
     app.use(cors());
 
+    app.use(session())
 
     app.get('/', (req, res) => {
         res.json({ message: `REST service operational at ${PORT}` });
     });
 
-    app.use('/users',authController);
+    app.use('/users', authController);
+    app.use('/data/catalog', dataController);
 
     app.listen(PORT, () => console.log(`REST service started at ${PORT}`));
 }
