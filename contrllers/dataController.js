@@ -1,10 +1,14 @@
 const dataController = require('express').Router()
 
-const { create } = require('../services/tripService')
+const { create, getAll } = require('../services/tripService')
 
 
-dataController.get('/', (req, res) => {
-    res.json([])
+dataController.get('/', async (req, res) => {
+
+    const trips = await getAll()
+
+    res.json(trips)
+
 })
 
 
