@@ -36,7 +36,9 @@ async function login(email, password) {
 }
 
 async function logout(token) {
+
     tokenBlacklist.add(token);
+
 }
 
 function createToken(user) {

@@ -33,7 +33,7 @@ async function start() {
     });
 
     app.use('/users', authController);
-    app.use('/data/catalog', dataController);
+    app.use('/data/trips', dataController);
 
     app.listen(PORT, () => console.log(`REST service started at ${PORT}`));
 }
