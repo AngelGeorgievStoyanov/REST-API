@@ -9,7 +9,12 @@ async function getAll(){
     return Trip.find()
 }
 
+async function getPostById(id){
+    return Trip.findById(id)
+}
+
 module.exports={
     create,
-    getAll
+    getAll,
+    getPostById
 }

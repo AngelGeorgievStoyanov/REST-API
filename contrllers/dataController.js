@@ -1,6 +1,6 @@
 const dataController = require('express').Router()
 
-const { create, getAll } = require('../services/tripService')
+const { create, getAll, getPostById } = require('../services/tripService')
 
 
 dataController.get('/', async (req, res) => {
@@ -18,6 +18,11 @@ dataController.post('/', async (req, res) => {
     const trip = await create(data)
     console.log(trip)
     res.json(trip)
+})
+
+dataController.get('/:id', async (req, res) => {
+    const post = await getPostById(req.params.id)
+    res.json(post)
 })
 
 module.exports = dataController
