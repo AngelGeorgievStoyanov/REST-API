@@ -25,9 +25,15 @@ async function updateTripById(id, trip) {
     return existing.save()
 }
 
+
+async function deleteTrypById(id){
+    return Trip.findByIdAndDelete(id)
+}
+
 module.exports = {
     create,
     getAll,
     getTripById,
-    updateTripById
+    updateTripById,
+    deleteTrypById
 }

@@ -1,6 +1,6 @@
 const dataController = require('express').Router()
 
-const { create, getAll, getTripById, updateTripById } = require('../services/tripService')
+const { create, getAll, getTripById, updateTripById, deleteTrypById } = require('../services/tripService')
 
 
 dataController.get('/', async (req, res) => {
@@ -31,6 +31,14 @@ dataController.put('/:id', async(req,res)=>{
     console.log(result)
     res.json(result)
 
+})
+
+dataController.delete('/:id', async(req,res)=>{
+    
+
+     await deleteTrypById(req.params.id)
+
+     res.status(204).end()
 })
 
 module.exports = dataController
