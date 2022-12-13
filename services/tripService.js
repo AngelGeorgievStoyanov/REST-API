@@ -10,6 +10,7 @@ async function getAll() {
 }
 
 async function getTripById(id) {
+    
     return Trip.findById(id)
 }
 
@@ -18,9 +19,14 @@ async function updateTripById(id, trip) {
 
     const existing = await Trip.findById(id)
 
-    existing.name = trip.name;
+    existing.title = trip.title;
     existing.description = trip.description;
-    existing.imageUrl = trip.imageUrl
+    existing.imageUrl = trip.imageUrl;
+    existing.typeOfPeople = trip.typeOfPeople;
+    existing.transport = trip.transport;
+    existing.destination = trip.destination;
+    existing.countPeoples = trip.countPeoples;
+    existing.likes=trip.likes
 
     return existing.save()
 }

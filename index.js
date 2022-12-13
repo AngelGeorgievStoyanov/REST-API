@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const authController = require('./contrllers/authController');
-const dataController = require('./contrllers/dataController');
+const tripController = require('./contrllers/tripController');
 const cors = require('./middlewares/cors');
 const session = require('./middlewares/session')
 
@@ -20,11 +20,11 @@ async function start() {
         throw new Error(err.message)
     }
 
-
+   
     const app = express();
     app.use(express.json());
-
-    app.use(cors());
+  
+     app.use(cors());
 
     app.use(session())
 
@@ -33,7 +33,7 @@ async function start() {
     });
 
     app.use('/users', authController);
-    app.use('/data/trips', dataController);
+    app.use('/data/trips', tripController);
 
     app.listen(PORT, () => console.log(`REST service started at ${PORT}`));
 }

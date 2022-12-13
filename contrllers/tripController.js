@@ -1,9 +1,9 @@
-const dataController = require('express').Router()
+const tripController = require('express').Router()
 
 const { create, getAll, getTripById, updateTripById, deleteTrypById } = require('../services/tripService')
 
 
-dataController.get('/', async (req, res) => {
+tripController.get('/', async (req, res) => {
 
     const trips = await getAll()
 
@@ -12,7 +12,7 @@ dataController.get('/', async (req, res) => {
 })
 
 
-dataController.post('/', async (req, res) => {
+tripController.post('/', async (req, res) => {
    
     const data = Object.assign( req.body)
     const trip = await create(data)
@@ -20,12 +20,13 @@ dataController.post('/', async (req, res) => {
     res.json(trip)
 })
 
-dataController.get('/:id', async (req, res) => {
+tripController.get('/:id', async (req, res) => {
     const post = await getTripById(req.params.id)
+    console.log(post)
     res.json(post)
 })
 
-dataController.put('/:id', async(req,res)=>{
+tripController.put('/:id', async(req,res)=>{
 
     const result = await updateTripById(req.params.id,req.body)
     console.log(result)
@@ -33,7 +34,7 @@ dataController.put('/:id', async(req,res)=>{
 
 })
 
-dataController.delete('/:id', async(req,res)=>{
+tripController.delete('/:id', async(req,res)=>{
     
 
      await deleteTrypById(req.params.id)
@@ -41,4 +42,4 @@ dataController.delete('/:id', async(req,res)=>{
      res.status(204).end()
 })
 
-module.exports = dataController
+module.exports = tripController
