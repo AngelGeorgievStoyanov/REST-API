@@ -4,6 +4,7 @@ const authController = require('./contrllers/authController');
 const tripController = require('./contrllers/tripController');
 const cors = require('./middlewares/cors');
 const session = require('./middlewares/session')
+const commentController = require('./contrllers/commentController')
 
 
 const PORT = 3030
@@ -34,6 +35,7 @@ async function start() {
 
     app.use('/users', authController);
     app.use('/data/trips', tripController);
+    app.use('/data/comments',commentController)
 
     app.listen(PORT, () => console.log(`REST service started at ${PORT}`));
 }
