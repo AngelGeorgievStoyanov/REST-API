@@ -15,9 +15,26 @@ async function deleteCommentById(id){
 }
 
 
+async function getCommentById(id) {
+    console.log(id,'-----')
+    return Comment.findById(id)
+}
+
+async function updateCommentById(id, comment) {
+
+
+    const existing = await Comment.findById(id)
+
+    existing.comment = comment.comment;
+    
+    return existing.save()
+}
+
 
 module.exports={
     create,
     getCommentsByTripId,
-    deleteCommentById
+    deleteCommentById,
+    getCommentById,
+    updateCommentById
 }
