@@ -10,8 +10,15 @@ async function getAll() {
 }
 
 async function getTripById(id) {
-    
-    return Trip.findById(id)
+
+
+    const existing = Trip.findById(id)
+    if (existing) {
+        return existing
+    } else {
+        throw new Error('Trip not found')
+
+    }
 }
 
 async function updateTripById(id, trip) {
@@ -26,14 +33,31 @@ async function updateTripById(id, trip) {
     existing.transport = trip.transport;
     existing.destination = trip.destination;
     existing.countPeoples = trip.countPeoples;
-    existing.likes=trip.likes
+    existing.likes = trip.likes
 
     return existing.save()
 }
 
 
-async function deleteTrypById(id){
+async function deleteTrypById(id) {
     return Trip.findByIdAndDelete(id)
+}
+
+async function getAllMyTrips(ownerId) {
+    const existing = Trip.find({ '_ownerId': `${ownerId}` })
+ 
+    if (existing) {
+        return existing
+    } else {
+        throw new Error('Trips not found')
+
+
+    }
+}
+
+
+async function getTop(){
+    return Trip.find()
 }
 
 module.exports = {
@@ -41,5 +65,7 @@ module.exports = {
     getAll,
     getTripById,
     updateTripById,
-    deleteTrypById
+    deleteTrypById,
+    getAllMyTrips,
+    getTop
 }
