@@ -33,7 +33,8 @@ async function updateTripById(id, trip) {
     existing.transport = trip.transport;
     existing.destination = trip.destination;
     existing.countPeoples = trip.countPeoples;
-    existing.likes = trip.likes
+    existing.likes = trip.likes;
+    existing.price=trip.price;
 
     return existing.save()
 }
